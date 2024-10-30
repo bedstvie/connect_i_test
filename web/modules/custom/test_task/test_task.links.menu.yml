@@ -1,0 +1,11 @@
+entity.test_task.settings:
+  title: 'Test task'
+  description: 'Configure a Test task entity type.'
+  route_name:  entity.test_task.settings
+  parent: system.admin_structure
+
+entity.test_task.collection:
+  title: 'Test tasks'
+  description: 'List of test tasks.'
+  route_name: entity.test_task.collection
+  parent: system.admin_content

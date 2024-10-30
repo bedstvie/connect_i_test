@@ -1,0 +1,18 @@
+entity.test_task.settings:
+  path: 'admin/structure/test-task'
+  defaults:
+    _form: '\Drupal\test_task\Form\TestTaskSettingsForm'
+    _title: 'Test task'
+  requirements:
+    _permission: 'administer test_task'
+
+test_task.backend_ajax_block_content:
+  path: '/ajax-content/backend-block'
+  defaults:
+    _controller: '\Drupal\test_task\Controller\BackendContentBlock::loadContent'
+    _title: 'Load Delayed Content'
+  requirements:
+    # Don't check access, because ajax callback available for all users.
+    _access: 'TRUE'
+  options:
+    no_cache: TRUE

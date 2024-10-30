@@ -1,0 +1,10 @@
+langcode: en
+status: true
+dependencies:
+  module:
+    - test_task
+id: test_task_save_action
+label: 'Save test tasks'
+type: test_task
+plugin: entity:save_action:test_task
+configuration: {  }

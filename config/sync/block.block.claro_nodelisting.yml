@@ -1,0 +1,21 @@
+uuid: aa8156b7-318e-4bbf-b39c-136617295092
+langcode: en
+status: true
+dependencies:
+  module:
+    - test_task
+  theme:
+    - claro
+id: claro_nodelisting
+theme: claro
+region: content
+weight: -3
+provider: null
+plugin: test_task_node_listing_block
+settings:
+  id: test_task_node_listing_block
+  label: 'Node Listing'
+  label_display: visible
+  provider: test_task
+  node_count: '20'
+visibility: {  }

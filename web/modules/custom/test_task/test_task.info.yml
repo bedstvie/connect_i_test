@@ -1,0 +1,10 @@
+name: Test task
+description: 'Custom module for test task.'
+type: module
+package: Custom
+core_version_requirement: "^10"
+dependencies:
+  - drupal:block
+  - drupal:node
+  - drupal:test_task_contrib
+  - drupal:entity_form_steps

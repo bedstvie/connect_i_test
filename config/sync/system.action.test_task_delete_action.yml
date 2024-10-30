@@ -1,0 +1,13 @@
+uuid: d3a1aa4d-4004-4963-83a6-07cb6aa923cf
+langcode: en
+status: true
+dependencies:
+  module:
+    - test_task
+_core:
+  default_config_hash: '-hIzUidaFwp5ykY2wv7u4qowDZi1mRYKUAvmYtqWG54'
+id: test_task_delete_action
+label: 'Delete test tasks'
+type: test_task
+plugin: 'entity:delete_action:test_task'
+configuration: {  }

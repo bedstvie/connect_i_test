@@ -1,0 +1,104 @@
+<?php
+
+/**
+ * @file
+ * Main file for test_task module.
+ */
+
+declare(strict_types=1);
+
+use Drupal\Core\Render\Element;
+use Drupal\user\UserInterface;
+
+/**
+ * Implements hook_entity_type_build().
+ */
+function test_task_entity_type_build(&$entity_types) {
+  if (isset($entity_types['node'])) {
+    $entity_types['node']->setClass('Drupal\test_task\Entity\ImprovedNode');
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function test_task_theme(): array {
+  return [
+    'test_task' => ['render element' => 'elements'],
+  ];
+}
+
+/**
+ * Prepares variables for test task templates.
+ *
+ * Default template: test-task.html.twig.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - elements: An associative array containing
+ *     the test task information and any
+ *     fields attached to the entity.
+ *   - attributes: HTML attributes for the containing element.
+ */
+function template_preprocess_test_task(array &$variables): void {
+  $variables['view_mode'] = $variables['elements']['#view_mode'];
+  foreach (Element::children($variables['elements']) as $key) {
+    $variables['content'][$key] = $variables['elements'][$key];
+  }
+}
+
+/**
+ * Implements hook_user_cancel().
+ */
+function test_task_user_cancel($edit, UserInterface $account, $method): void {
+  switch ($method) {
+    case 'user_cancel_block_unpublish':
+      // Unpublish test tasks.
+      $storage = \Drupal::entityTypeManager()->getStorage('test_task');
+      $test_task_ids = $storage->getQuery()
+        ->condition('uid', $account->id())
+        ->condition('status', 1)
+        ->accessCheck(FALSE)
+        ->execute();
+      foreach ($storage->loadMultiple($test_task_ids) as $test_task) {
+        $test_task->set('status', FALSE)->save();
+      }
+      break;
+
+    case 'user_cancel_reassign':
+      // Anonymize test tasks.
+      $storage = \Drupal::entityTypeManager()->getStorage('test_task');
+      $test_task_ids = $storage->getQuery()
+        ->condition('uid', $account->id())
+        ->accessCheck(FALSE)
+        ->execute();
+      foreach ($storage->loadMultiple($test_task_ids) as $test_task) {
+        $test_task->setOwnerId(0)->save();
+      }
+      break;
+  }
+}
+
+/**
+ * Implements hook_ENTITY_TYPE_predelete() for user entities.
+ */
+function test_task_user_predelete(UserInterface $account): void {
+  // Delete test tasks that belong to this account.
+  $storage = \Drupal::entityTypeManager()->getStorage('test_task');
+  $test_task_ids = $storage->getQuery()
+    ->condition('uid', $account->id())
+    ->accessCheck(FALSE)
+    ->execute();
+  $storage->delete(
+    $storage->loadMultiple($test_task_ids)
+  );
+  // Delete old revisions.
+  $test_task_ids = $storage->getQuery()
+    ->allRevisions()
+    ->condition('uid', $account->id())
+    ->accessCheck(FALSE)
+    ->execute();
+  foreach (array_keys($test_task_ids) as $revision_id) {
+    $storage->deleteRevision($revision_id);
+  }
+}

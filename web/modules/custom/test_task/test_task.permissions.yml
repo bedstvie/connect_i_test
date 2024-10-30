@@ -1,0 +1,17 @@
+administer test_task:
+  title: 'Administer test tasks'
+  restrict access: true
+view test_task:
+  title: 'View test task'
+edit test_task:
+  title: 'Edit test task'
+delete test_task:
+  title: 'Delete test task'
+create test_task:
+  title: 'Create test task'
+view test_task revision:
+  title: 'View test task revision'
+revert test_task revision:
+  title: 'Revert test task revision'
+delete test_task revision:
+  title: 'Delete test task revision'

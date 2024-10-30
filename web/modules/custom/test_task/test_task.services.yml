@@ -1,0 +1,16 @@
+services:
+  test_task.fetch_object:
+    class: Drupal\test_task\FetchObjectServiceDecorator
+    arguments: [ '@current_route_match' ]
+    decorates: test_task_contrib.fetch_object
+
+  test_task.user_accessibility:
+    class: Drupal\test_task\Access\TestTaskUserAccessibility
+    arguments: [ '@current_user' ]
+    tags:
+      - { name: access_check, applies_to: '_user_accessibility' }
+
+  test_task.route_subscriber:
+    class: Drupal\test_task\EventSubscriber\TestTaskRouteSubscriber
+    tags:
+      - { name: event_subscriber }

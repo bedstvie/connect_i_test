@@ -1,0 +1,46 @@
+<?php
+
+/**
+ * @file
+ * Install file for module test_task.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function test_task_install() {
+  // Rebuild user entity form display for mobile number field.
+  $storage = \Drupal::entityTypeManager()->getStorage('entity_form_display');
+  /** @var \Drupal\Core\Entity\Display\EntityFormDisplayInterface $user_form_display */
+  $user_form_display = $storage->load('user.user.default');
+  if (!$user_form_display) {
+    $user_form_display = $storage->create([
+      'targetEntityType' => 'user',
+      'bundle' => 'user',
+      'mode' => 'default',
+      'status' => TRUE,
+    ]);
+  }
+  $user_form_display
+    ->setComponent('field_accessibility', [
+      'hidden' => TRUE,
+    ])
+    ->save();
+
+  // Create base_page node type.
+  $node_type_storage = \Drupal::entityTypeManager()->getStorage('node_type');
+  // Check if the content type already exists to avoid duplicates.
+  if (!$node_type_storage->load('base_page')) {
+    // Create the content type.
+    $content_type = $node_type_storage->create([
+      'type' => 'basic_page',
+      'name' => 'Basic page',
+      'description' => 'A custom content type created programmatically.',
+    ]);
+    $content_type->save();
+
+    // Set default settings for the content type.
+    $content_type->setThirdPartySetting('node', 'display_submitted', TRUE);
+    $content_type->save();
+  }
+}

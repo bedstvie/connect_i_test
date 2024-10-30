@@ -1,0 +1,14 @@
+uuid: 47130494-0c52-4017-94f0-8f5a70b0edca
+langcode: en
+status: true
+dependencies: {  }
+third_party_settings:
+  node:
+    display_submitted: true
+name: basic_page
+type: basic_page
+description: 'A custom content type created programmatically.'
+help: null
+new_revision: true
+preview_mode: 1
+display_submitted: true

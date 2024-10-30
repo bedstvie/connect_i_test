@@ -1,0 +1,7 @@
+name: Test task contrib
+description: 'Helper custom module for imitation contrib test task.'
+type: module
+package: Custom
+core_version_requirement: "^10"
+dependencies:
+  - drupal:user

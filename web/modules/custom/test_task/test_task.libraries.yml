@@ -1,0 +1,6 @@
+backend_ajax_block_content:
+  js:
+    js/backend_ajax_block_content.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal

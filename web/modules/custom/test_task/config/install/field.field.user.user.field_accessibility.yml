@@ -1,0 +1,26 @@
+uuid: 4b93964f-ae25-4b51-9991-78d518b39e31
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.user.field_accessibility
+  module:
+    - options
+    - user
+  enforced:
+    module:
+      - test_task
+id: user.user.field_accessibility
+field_name: field_accessibility
+entity_type: user
+bundle: user
+label: Accessibility
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: no_restriction
+default_value_callback: ''
+settings: {  }
+field_type: list_string

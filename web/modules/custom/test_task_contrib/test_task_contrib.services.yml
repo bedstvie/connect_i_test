@@ -1,0 +1,4 @@
+services:
+  test_task_contrib.fetch_object:
+    class: Drupal\test_task_contrib\FetchObjectService
+    arguments: ['@current_route_match']

@@ -1,0 +1,5 @@
+test_task.add_form:
+  title: 'Add test task'
+  route_name: entity.test_task.add_form
+  appears_on:
+    - entity.test_task.collection

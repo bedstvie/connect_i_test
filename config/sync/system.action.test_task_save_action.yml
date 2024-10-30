@@ -1,0 +1,13 @@
+uuid: ec066b90-46f9-4803-8609-0574118d93ff
+langcode: en
+status: true
+dependencies:
+  module:
+    - test_task
+_core:
+  default_config_hash: d_UmXn51XN7YCBGT0joixFQFMglg21Ak2nAdhlMU-CQ
+id: test_task_save_action
+label: 'Save test tasks'
+type: test_task
+plugin: 'entity:save_action:test_task'
+configuration: {  }

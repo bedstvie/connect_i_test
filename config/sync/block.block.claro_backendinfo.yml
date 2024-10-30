@@ -1,0 +1,20 @@
+uuid: db2637c2-ee0c-485e-8e32-815bf7648464
+langcode: en
+status: true
+dependencies:
+  module:
+    - test_task
+  theme:
+    - claro
+id: claro_backendinfo
+theme: claro
+region: content
+weight: -5
+provider: null
+plugin: backend_info_block
+settings:
+  id: backend_info_block
+  label: 'Backend Info'
+  label_display: visible
+  provider: test_task
+visibility: {  }
